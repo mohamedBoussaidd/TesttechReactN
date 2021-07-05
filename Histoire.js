@@ -10,7 +10,7 @@ export default class Histoire extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = { tkt: [] };
+        this.state = { tabDonée: [] };
         this.uneHistoire = this.uneHistoire.bind(this);
     }
     uneHistoire() {
@@ -44,7 +44,7 @@ export default class Histoire extends React.Component {
                 })
                     .then((reponse) => {
                         this.setState({
-                            tkt: [...this.state.tkt, ...reponse.data.data.stories.edges.map((e) => (e))]
+                            tabDonée: [...this.state.tabDonée, ...reponse.data.data.stories.edges.map((e) => (e))]
                         })
                     })
                     .catch(error => {
@@ -52,7 +52,7 @@ export default class Histoire extends React.Component {
                     });
             })
         return (
-            this.state.tkt
+            this.state.tabDonée
         )
     }
     render() {
@@ -64,7 +64,7 @@ export default class Histoire extends React.Component {
                 <ScrollView>
                     <View>
                         <FlatList
-                            data={this.state.tkt}
+                            data={this.state.tabDonée}
                             keyExtractor={(item) => item.node.id.toString()}
                             renderItem={({ item }) => <Text style={styles.content_container}>{item.node.title}</Text>}
                             renderItem={({ item }) => <Image style={styles.image} source={{ uri: item.node.picture.contentUrl }} />}
